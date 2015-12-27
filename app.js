@@ -188,8 +188,155 @@ function filterAdult2(arr) {
 console.log('**********************************这是分割线*************************************');
 //判断数组中所有的数字是否大于0；
 function isAllNumPosive2(arr) {
-    
+    var res = true;
+    if (Array.isArray(arr)) {
+        if (arr.every) {
+            res = arr.every(function (each) {
+                var isPosive = true;
+                if (typeof each == 'number' && each < 0) {
+                    isPosive = false;
+                }
+                return isPosive;
+            })
+        } else {
+            arr.forEach(function (each) {
+                if (typeof each == 'number' && each < 0) {
+                    res = false;
+                }
+            })
+        }
+    } else {
+        throw  new TypeError('param is not array');
+    }
+    return res;
 }
+
+//改变传入的数组，将数组的第n个元素（从0开始计算）个元素放到数组的开头
+function putFirst2(arr, n) {
+    if (Array.isArray(arr)) {
+        var item = arr.splice(n, 1)[0];
+        arr.unshift(item);
+    }
+}
+
+//将arguments对象转换为数组
+function toArray(isAllLikeArray) {
+    return [].slice.call(isAllLikeArray);
+}
+
+
+//将数组中的数字内容求和
+function sum2(arr) {
+    var res = 0;
+    if (Array.isArray(arr)) {
+        if (arr.reduce) {
+            res = arr.reduce(function (prev, curr) {
+                if (typeof curr == 'number') {
+                    return prev + curr;
+                }
+                return prev;
+            }, 0);
+        } else {
+            arr.forEach(function (each) {
+                if (typeof each == 'number') {
+                    res += each;
+                }
+            })
+        }
+        return res;
+    }
+}
+
+
+//将数组中的元素按照age字段排序
+function sortAge2(arr) {
+    var res = false;
+    if (Array.isArray(arr)) {
+        res = arr.sort(function (a, b) {
+            return a.age < b.age ? -1 : 1;
+        });
+    } else {
+        throw new TypeError('param is not Array');
+    }
+}
+
+//将数组中的元素去重,其中元素都为基本类型
+function uniq2(arr) {
+    var res = [];
+    if (Array.isArray(arr)) {
+        arr.forEach(function (each) {
+            if (res.indexOf(each) === -1) {
+                res.push(each);
+            }
+        })
+    } else {
+        throw new TypeError('param is not Array');
+    }
+    return arr;
+}
+
+//or
+function uniq3(arr) {
+    var res = [];
+    var cache = {};
+    if (Array.isArray(arr)) {
+        arr.forEach(function (each) {
+            if (cache[each] === undefined) {
+                res.push(each);
+            }
+            cache[each] = true;
+        });
+    } else {
+        throw  new TypeError('param is not Array');
+    }
+    return res;
+}
+
+
+//将数组中的元素乱序
+function  random2(arr){
+    var res;
+    if (Array.isArray(arr)){
+        res=arr.sort(function () {
+            return Math.random()>0.5?1:-1;
+        });
+    }else {
+        throw  new TypeError('param is not Array');
+    }
+    return res;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
